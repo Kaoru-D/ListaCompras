@@ -2,6 +2,8 @@ import { useState } from "react";
 import Form from "./Form";
 import { nanoid } from "nanoid";
 import Items from "./Items";
+import { toast, ToastContainer } from "react-toastify";
+
 
 const getLocalStorage = () => {
   const list = localStorage.getItem('items');
@@ -27,12 +29,14 @@ const App = () => {
     const newItems = [...items,newItem];
     setItems(newItems);
     setLocalStorage(newItems);
+    toast.success('Item agregado a la lista');
   }
   
   const removeItem = (itemId)=> {
     const newItems = items.filter((item)=> item.id !== itemId);
     setItems(newItems);
     setLocalStorage(newItems);
+    toast.error('Item eliminado de la lista');
   }
 
   const toggleItem = (itemId) => {
@@ -45,10 +49,13 @@ const App = () => {
     });
     setItems(newItems);
     setLocalStorage(newItems);
+    const toggledItem = newItems.find((item) => item.id === itemId);
+    toast.info(`${toggledItem.name} ${toggledItem.completed ? 'marcado': 'desmarcado'} en la lista`);
   }
 
   return (
     <section className="section-center">
+      <ToastContainer />
       <Form addItem={addItem } removeItem={removeItem}/>
       <Items items={items} removeItem={removeItem} toggleItem={toggleItem}/>
     </section>
