@@ -36,7 +36,7 @@ const App = () => {
     const newItems = items.filter((item)=> item.id !== itemId);
     setItems(newItems);
     setLocalStorage(newItems);
-    toast.error('Item eliminado de la lista');
+    toast.success('Item eliminado de la lista');
   }
 
   const toggleItem = (itemId) => {

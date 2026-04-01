@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { toast } from 'react-toastify';
 
 const Form = ({addItem}) => {
     const [nameItem, setNameItem]= useState('');
@@ -6,6 +7,7 @@ const Form = ({addItem}) => {
     const handleSubmit = (e)=> {
         e.preventDefault();
         if (!nameItem) {
+            toast.error('Por favor ingresa un nombre para agregar a la lista');
             return;
         };
         addItem(nameItem);
